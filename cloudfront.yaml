@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  DomainName:
+    Type: String
+  CertificateArn:
+    Type: String
+  S3BucketDomainName:
+    Type: String
+
+Resources:
+  CloudFrontOAI:
+    Type: AWS::CloudFront::OriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig: {}
+
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        DefaultRootObject: index.html
+        Origins:
+          - DomainName: !Ref S3BucketDomainName
+            Id: S3Origin
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CloudFrontOAI}"
+        DefaultCacheBehavior:
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods: [GET, HEAD]
+          CachedMethods: [GET, HEAD]
+          ForwardedValues:
+            QueryString: false
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          SslSupportMethod: sni-only
+        Aliases:
+          - !Ref DomainName
+
+Outputs:
+  CloudFrontDistributionId:
+    Value: !Ref CloudFrontDistribution
+  CloudFrontDomainName:
+    Value: !GetAtt CloudFrontDistribution.DomainName

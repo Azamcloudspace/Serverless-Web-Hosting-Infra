@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  DomainName:
+    Type: String
+  CertificateArn:
+    Type: String
+  HostedZoneId:
+    Type: String
+
+Resources:
+  S3Stack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://mybucket.s3.amazonaws.com/templates/s3.yaml
+      Parameters:
+        DomainName: !Ref DomainName
+
+  CloudFrontStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://mybucket.s3.amazonaws.com/templates/cloudfront.yaml
+      Parameters:
+        DomainName: !Ref DomainName
+        CertificateArn: !Ref CertificateArn
+        S3BucketDomainName: !Sub "${DomainName}-site.s3.amazonaws.com"
+
+  Route53Stack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://mybucket.s3.amazonaws.com/templates/route53.yaml
+      Parameters:
+        DomainName: !Ref DomainName
+        HostedZoneId: !Ref HostedZoneId
+        CloudFrontDomainName: !GetAtt CloudFrontStack.Outputs.CloudFrontDomainName
