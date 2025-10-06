@@ -11,7 +11,7 @@ phases:
       - aws s3 cp WebBucket.yaml s3://iac-bucket-azamcloud/
       - aws s3 cp Route53.yaml s3://iac-bucket-azamcloud/
       - aws s3 cp cloudfront.yaml s3://iac-bucket-azamcloud/
-      - aws cloudformation deploy --template-file master-stack.yaml --stack-name ecs-infra-stack --capabilities CAPABILITY_NAMED_IAM --parameter-overrides file://prod-params.json
+      - aws cloudformation deploy --template-file master-stack.yaml --stack-name ServerlessWeb-stack --capabilities CAPABILITY_NAMED_IAM --parameter-overrides file://prod-params.json
 
 artifacts:
   files:
