@@ -1,17 +1,18 @@
 [
   {
-    "ParameterKey": "InputBucketName",
-    "ParameterValue": "InputBucket12345"
+    "ParameterKey": "DomainName",
+    "ParameterValue": "azamcloudspace.click"
   },
   {
-    "ParameterKey": "OutputBucketName",
-    "ParameterValue": "OutputBucket12345"
+    "ParameterKey": "CertificateArn",
+    "ParameterValue": "arn:aws:acm:us-east-1:975050225555:certificate/c5f2d67d-cb73-4d07-8e77-66793638852c"
   },
   {
-    "ParameterKey": "FunctionName",
-    "ParameterValue": "ImageProcessorFunction"
+    "ParameterKey": "HostedZoneId",
+    "ParameterValue": "Z0040497NT0F8RUQMJK"
   }
 ]
+
 
 
 
