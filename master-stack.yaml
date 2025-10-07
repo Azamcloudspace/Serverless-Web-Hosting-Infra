@@ -48,14 +48,14 @@ Resources:
   CodeBuildStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://mybucket.s3.amazonaws.com/templates/route53.yaml
+      TemplateURL: https://mybucket.s3.amazonaws.com/templates/codebuild.yaml
       Parameters:
         CodeBuildRole: !Ref CodeBuildRole
 
   CodePipelineStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://mybucket.s3.amazonaws.com/templates/route53.yaml
+      TemplateURL: https://mybucket.s3.amazonaws.com/templates/codepipeline.yaml
       Parameters:
         GitHubOwner: !Ref GitHubOwner
         GitHubRepo: !Ref GitHubRepo
@@ -69,4 +69,5 @@ Resources:
   
 
   
+
 
