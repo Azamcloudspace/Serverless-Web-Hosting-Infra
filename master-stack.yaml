@@ -23,14 +23,14 @@ Resources:
   S3Stack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://mybucket.s3.amazonaws.com/templates/s3.yaml
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/s3.yaml
       Parameters:
         DomainName: !Ref DomainName
 
   CloudFrontStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://mybucket.s3.amazonaws.com/templates/cloudfront.yaml
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/cloudfront.yaml
       Parameters:
         DomainName: !Ref DomainName
         CertificateArn: !Ref CertificateArn
@@ -39,7 +39,7 @@ Resources:
   Route53Stack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://mybucket.s3.amazonaws.com/templates/route53.yaml
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/route53.yaml
       Parameters:
         DomainName: !Ref DomainName
         HostedZoneId: !Ref HostedZoneId
@@ -48,19 +48,20 @@ Resources:
   CodeBuildStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://mybucket.s3.amazonaws.com/templates/codebuild.yaml
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codebuild.yaml
       Parameters:
         CodeBuildRole: !Ref CodeBuildRole
 
   CodePipelineStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://mybucket.s3.amazonaws.com/templates/codepipeline.yaml
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipeline.yaml
       Parameters:
         GitHubOwner: !Ref GitHubOwner
         GitHubRepo: !Ref GitHubRepo
         GitHubToken: !Ref GitHubToken
         CodePipeRole: !Ref CodePipeRole
+        CodeBuildProjectName: !GetAtt CodeBuildStack.Outputs.CodeBuildProjectName
         
 
 
@@ -69,5 +70,6 @@ Resources:
   
 
   
+
 
 
