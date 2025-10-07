@@ -23,7 +23,7 @@ Resources:
   S3Stack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/s3.yaml
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/WebBucket.yaml
       Parameters:
         DomainName: !Ref DomainName
 
@@ -39,7 +39,7 @@ Resources:
   Route53Stack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/route53.yaml
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/Route53.yaml
       Parameters:
         DomainName: !Ref DomainName
         HostedZoneId: !Ref HostedZoneId
@@ -70,6 +70,7 @@ Resources:
   
 
   
+
 
 
 
