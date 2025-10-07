@@ -8,10 +8,31 @@
     "ParameterValue": "arn:aws:acm:us-east-1:975050225555:certificate/c5f2d67d-cb73-4d07-8e77-66793638852c"
   },
   {
+    "ParameterKey": "CodeBuildRole",
+    "ParameterValue": "arn:aws:iam::975050225555:role/service-role/codebuild-ecs--service-role"
+  },
+  {
+    "ParameterKey": "GitHubOwner",
+    "ParameterValue": "Azamcloudspace"
+  },
+  {
+    "ParameterKey": "GitHubRepo",
+    "ParameterValue": "Serverless-Web-Hosting-App"
+  },
+  {
+    "ParameterKey": "GitHubToken",
+    "ParameterValue": "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"
+  },
+  {
+    "ParameterKey": "CodePipeRole",
+    "ParameterValue": "arn:aws:iam::975050225555:role/service-role/AWSCodePipelineServiceRole-us-east-1-Testing"
+  },
+  {
     "ParameterKey": "HostedZoneId",
     "ParameterValue": "Z0040497NT0F8RUQMJK"
   }
 ]
+
 
 
 
