@@ -1,0 +1,73 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CI/CD Pipeline for Static Website
+
+Parameters:
+  GitHubOwner:
+    Type: String
+
+  GitHubRepo:
+    Type: String
+
+  GitHubBranch:
+    Type: String
+    Default: main
+
+  GitHubToken:
+    Type: String
+    NoEcho: true
+
+  CodeBuildProjectName:
+    Type: String
+  
+  CodepipeRole:
+    Type: String
+    
+
+Resources:
+
+  ArtifactStoreBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${AWS::StackName}-artifacts"
+
+  Pipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      RoleArn: !Ref CodepipeRole
+      ArtifactStore:
+        Type: S3
+        Location: !Ref ArtifactStoreBucket
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: GitHubSource
+              ActionTypeId:
+                Category: Source
+                Owner: ThirdParty
+                Provider: GitHub
+                Version: "1"
+              Configuration:
+                Owner: !Ref GitHubOwner
+                Repo: !Ref GitHubRepo
+                Branch: !Ref GitHubBranch
+                OAuthToken: !Ref GitHubToken
+              OutputArtifacts:
+                - Name: SourceOutput
+
+        - Name: Build
+          Actions:
+            - Name: CodeBuild
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: "1"
+              InputArtifacts:
+                - Name: SourceOutput
+              Configuration:
+                ProjectName: !Ref CodeBuildProjectName
+
+Outputs:
+  PipelineName:
+    Description: The name of the CodePipeline
+    Value: !Ref Pipeline
