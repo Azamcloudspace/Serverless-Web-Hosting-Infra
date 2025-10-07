@@ -19,7 +19,7 @@ Parameters:
   CodeBuildProjectName:
     Type: String
   
-  CodepipeRole:
+  CodePipeRole:
     Type: String
     
 
@@ -33,7 +33,7 @@ Resources:
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
-      RoleArn: !Ref CodepipeRole
+      RoleArn: !Ref CodePipeRole
       ArtifactStore:
         Type: S3
         Location: !Ref ArtifactStoreBucket
@@ -71,3 +71,4 @@ Outputs:
   PipelineName:
     Description: The name of the CodePipeline
     Value: !Ref Pipeline
+
