@@ -12,7 +12,8 @@ Resources:
   CloudFrontOAI:
     Type: AWS::CloudFront::OriginAccessIdentity
     Properties:
-      CloudFrontOriginAccessIdentityConfig: {}
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: "Access identity for CloudFront to reach S3"
 
   CloudFrontDistribution:
     Type: AWS::CloudFront::Distribution
@@ -43,3 +44,4 @@ Outputs:
     Value: !Ref CloudFrontDistribution
   CloudFrontDomainName:
     Value: !GetAtt CloudFrontDistribution.DomainName
+
