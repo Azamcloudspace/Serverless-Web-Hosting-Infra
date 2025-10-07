@@ -7,6 +7,17 @@ Parameters:
     Type: String
   HostedZoneId:
     Type: String
+  CodeBuildRole:
+    Type: String
+  GitHubOwner:
+    Type: String
+  GitHubRepo:
+    Type: String
+  GitHubToken:
+    Type: String
+    NoEcho: true
+  CodePipeRole:
+    Type: String
 
 Resources:
   S3Stack:
@@ -33,3 +44,29 @@ Resources:
         DomainName: !Ref DomainName
         HostedZoneId: !Ref HostedZoneId
         CloudFrontDomainName: !GetAtt CloudFrontStack.Outputs.CloudFrontDomainName
+  
+  CodeBuildStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://mybucket.s3.amazonaws.com/templates/route53.yaml
+      Parameters:
+        CodeBuildRole: !Ref CodeBuildRole
+
+  CodePipelineStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://mybucket.s3.amazonaws.com/templates/route53.yaml
+      Parameters:
+        GitHubOwner: !Ref GitHubOwner
+        GitHubRepo: !Ref GitHubRepo
+        GitHubToken: !Ref GitHubToken
+        CodePipeRole: !Ref CodePipeRole
+        
+
+
+  
+
+  
+
+  
+
