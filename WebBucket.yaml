@@ -13,9 +13,9 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: index.html
       PublicAccessBlockConfiguration:
-        BlockPublicAcls: true
+        BlockPublicAcls: false
         BlockPublicPolicy: false
-        IgnorePublicAcls: true
+        IgnorePublicAcls: false
         RestrictPublicBuckets: false
       OwnershipControls:
         Rules:
@@ -38,3 +38,4 @@ Outputs:
     Value: !Ref WebsiteBucket
   S3BucketArn:
     Value: !GetAtt WebsiteBucket.Arn
+
