@@ -52,7 +52,7 @@ Resources:
       Parameters:
         CodeBuildRole: !Ref CodeBuildRole
 
-  codepipelinestack:
+  CodePipelineStack:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipeline.yaml
@@ -70,6 +70,7 @@ Resources:
   
 
   
+
 
 
 
