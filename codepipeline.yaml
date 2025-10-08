@@ -28,7 +28,7 @@ Resources:
   ArtifactStoreBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "${AWS::StackName}-artifacts"
+      BucketName: codepipelineartifacts6788
 
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
@@ -71,4 +71,5 @@ Outputs:
   PipelineName:
     Description: The name of the CodePipeline
     Value: !Ref Pipeline
+
 
