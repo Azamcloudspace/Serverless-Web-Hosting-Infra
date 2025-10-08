@@ -9,11 +9,6 @@ Parameters:
     Type: String
 
 Resources:
-  CloudFrontOAI:
-    Type: AWS::CloudFront::OriginAccessIdentity
-    Properties:
-      CloudFrontOriginAccessIdentityConfig:
-        Comment: "Access identity for CloudFront to reach S3"
 
   CloudFrontDistribution:
     Type: AWS::CloudFront::Distribution
@@ -24,8 +19,7 @@ Resources:
         Origins:
           - DomainName: !Ref S3BucketDomainName
             Id: S3Origin
-            S3OriginConfig:
-              OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CloudFrontOAI}"
+            S3OriginConfig: {}
         DefaultCacheBehavior:
           TargetOriginId: S3Origin
           ViewerProtocolPolicy: redirect-to-https
@@ -44,4 +38,5 @@ Outputs:
     Value: !Ref CloudFrontDistribution
   CloudFrontDomainName:
     Value: !GetAtt CloudFrontDistribution.DomainName
+
 
